@@ -33,13 +33,54 @@ pip install pipenv
 ```
 產生python3的虛擬環境
 pipenv --three
-```
-可以進入虛擬機環境
 pipenv shell
+```
+
+如果失敗請手動刪除產生出來的檔案 .virtualenvs\StockBot9427
+```
+pipenv --rm
+```
+
+可以進入虛擬機環境，並確認虛擬環境可以使用
+```
+pipenv shell
+```
+
+安裝所有 Pipfile.lock 中指定的版本套件。
+```
+pipenv sync
+```
+
+列出套件安裝的 dependency tree (把 Pipfile.lock 以 dependency tree 方式倒出)。
+```
+pipenv graph 
+```
+
+## install ngrok
+流程請參照網址中流程
+https://ngrok.com/download
+```
+https://<ngrok_uuid>.ngrok.io/is-server-alive
 ```
 
 ## vscode's setting
 ### File->Preferences->Settings-> find "python.pythonPath"
 ```
     "python.pythonPath": "C:\\Users\\jhang\\.virtualenvs\\StockBot9427-a5qWSRp8\\Scripts\\python.exe"
+```
+
+
+
+
+
+
+line 官方的開發者後台
+```
+https://developers.line.biz/console/provider/1654206852
+```
+
+
+
+``` run service
+python app.py 9427
 ```

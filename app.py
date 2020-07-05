@@ -13,9 +13,9 @@ app = Flask(__name__)
 
 # get channel_secret and channel_access_token from your environment variable
 channel_secret = os.getenv('LINE_CHANNEL_SECRET',
-                           '81210f41622e76ff15059fea8d014d51')
+                           '2ac67b792cac1e4668d055b0563fcf00')
 channel_access_token = os.getenv('LINE_CHANNEL_ACCESS_TOKEN',
-                                 'Oc6vf64VppCWaB4NOYRTHE3qstw8WYXXKTlB86IC9J7PqMj8M/YfoJcy+K6KOa2QUahGZmNoZ12ywKiKjayCMpdg5br+M6/nV6woSQTnsIwbyqg6uthHnk1np+TVwCGs9Hl3oac4xiAovPlV+IG51AdB04t89/1O/w1cDnyilFU=')
+                                 '+3HeydgL8vDkFK1gd13XZqCMJNZ2K/19YPse89GN3RlXcm/2oudAi7RAiOVGBZBOkWICEjqRgPv3uY7sfHT1DJfV+rXbqVg82UEiORd2o1gX/KkkVMCrDyZmVlMdgn4sXozgeSDpyjicIAPqlBrp2gdB04t89/1O/w1cDnyilFU=')
 if channel_secret is None or channel_access_token is None:
     print('Specify LINE_CHANNEL_SECRET and LINE_CHANNEL_ACCESS_TOKEN as environment variables.')
     sys.exit(1)
@@ -26,6 +26,9 @@ line_bot_api.push_message(my_user_id, TextSendMessage(text="start"))
 
 # 此為 Webhook callback endpoint
 
+@app.route("/is-server-alive")
+def is_server_alive():
+    return 'server is alive'
 
 @app.route("/callback", methods=['POST'])
 def callback():
