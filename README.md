@@ -13,7 +13,7 @@ https://code.visualstudio.com/download
 ##### python 寫python一定要安裝
 ##### GitLens 
 
-### Anaconda
+### Anaconda 為將需要的python和python module一次安裝
 記得勾選增加為環境變數
 https://www.anaconda.com/products/individual
 
@@ -26,15 +26,18 @@ https://drive.google.com/file/d/1Ks7MMeyg_KqIe80zuh6fo9b641Wp0zBc/view?usp=shari
 
 
 ## install pipenv
-pipenv 是用來管理python module，也可以說成管理
+pipenv 是用來管理python module，也可以說成管理pip有點像虛擬環境，是為了應對不同專案可能會需要不同的環境設定module，所延伸出的虛擬pip管理
 ```
+安裝pipenv
 pip install pipenv
 ```
-
-產生
-```
+產生python3的虛擬環境
 pipenv --three
 ```
+可以進入虛擬機環境
+pipenv shell
+```
+
 ## vscode's setting
 ### File->Preferences->Settings-> find "python.pythonPath"
 ```
