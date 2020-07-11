@@ -26,6 +26,11 @@ line_bot_api.push_message(my_user_id, TextSendMessage(text="start"))
 
 # 此為 Webhook callback endpoint
 
+
+@app.route('/')
+def hello():
+    return f'Hello, Heroku!'
+
 @app.route("/is-server-alive")
 def is_server_alive():
     return 'server is alive'
@@ -73,4 +78,4 @@ def handle_message(event):
 
 
 if __name__ == "__main__":
-    app.run(debug=True, port=9427)
+    app.run(debug=True)
