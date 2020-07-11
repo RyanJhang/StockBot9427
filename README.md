@@ -31,6 +31,7 @@ pipenv 是用來管理python module，也可以說成管理pip有點像虛擬環
 安裝pipenv
 pip install pipenv
 ```
+```
 產生python3的虛擬環境
 pipenv --three
 pipenv shell
