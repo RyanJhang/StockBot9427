@@ -1,1 +1,1 @@
-web: python .\app.py 9427
+web: python app.py 9427
