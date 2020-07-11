@@ -1,1 +1,1 @@
-web: gunicorn -b :9427 app:app
+web: python .\app.py 9427
