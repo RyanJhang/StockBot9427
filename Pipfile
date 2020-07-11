@@ -11,6 +11,7 @@ autopep8 = "*"
 requests = "*"
 flask = "*"
 line-bot-sdk = "*"
+gunicorn = "*"
 
 [requires]
 python_version = "3.7"
