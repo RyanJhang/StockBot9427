@@ -89,24 +89,30 @@ python app.py 9427
 
 ## 部屬到Heroku流程
 ```
+# 請使用 powershell
 powershell
 
+# 切換到專案路徑
 cd WORKING_DIRECTORY
 
+# 登入 heroku
 heroku login
 
+# 改成heroku app名稱
 $env:HEROKU_APP=<your_heroku_app>
 
+# 確認是否正確
 echo $env:HEROKU_APP
 
+# 確認遠端是否正確
 heroku git:remote -a $env:HEROKU_APP
 
+# 定義 LINE的資訊到 Heroku 環境變數中
 heroku config:set --app $env:HEROKU_APP LINE_USER_ID=<your_id>
-
 heroku config:set --app $env:HEROKU_APP LINE_CHANNEL_SECRET=<your_secret_key> 
-
 heroku config:set --app $env:HEROKU_APP LINE_CHANNEL_ACCESS_TOKEN=<your_access_token_key>
 
+# 確認是否定義成功，有出現才是成功
 heroku config --app $env:HEROKU_APP
 ```
 
