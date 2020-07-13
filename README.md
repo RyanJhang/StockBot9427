@@ -85,3 +85,28 @@ https://developers.line.biz/console/provider/1654206852
 ``` run service
 python app.py 9427
 ```
+
+
+## 部屬到Heroku流程
+```
+powershell
+
+cd WORKING_DIRECTORY
+
+heroku login
+
+$env:HEROKU_APP=<your_heroku_app>
+
+echo $env:HEROKU_APP
+
+heroku git:remote -a $env:HEROKU_APP
+
+heroku config:set --app $env:HEROKU_APP LINE_USER_ID=<your_id>
+
+heroku config:set --app $env:HEROKU_APP LINE_CHANNEL_SECRET=<your_secret_key> 
+
+heroku config:set --app $env:HEROKU_APP LINE_CHANNEL_ACCESS_TOKEN=<your_access_token_key>
+
+heroku config --app $env:HEROKU_APP
+```
+

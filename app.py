@@ -7,16 +7,14 @@ from linebot.exceptions import InvalidSignatureError
 from linebot.models import *
 from linebot.models import MessageEvent, TextMessage, TextSendMessage
 
-my_user_id = 'U4e2ae82cdfa65642fdb6e40744409bac'
+my_user_id = os.getenv('LINE_USER_ID')
 
 app = Flask(__name__)
 
 # get channel_secret and channel_access_token from your environment variable
-channel_secret = os.getenv('LINE_CHANNEL_SECRET',
-                           '2ac67b792cac1e4668d055b0563fcf00')
-channel_access_token = os.getenv('LINE_CHANNEL_ACCESS_TOKEN',
-                                 '+3HeydgL8vDkFK1gd13XZqCMJNZ2K/19YPse89GN3RlXcm/2oudAi7RAiOVGBZBOkWICEjqRgPv3uY7sfHT1DJfV+rXbqVg82UEiORd2o1gX/KkkVMCrDyZmVlMdgn4sXozgeSDpyjicIAPqlBrp2gdB04t89/1O/w1cDnyilFU=')
-if channel_secret is None or channel_access_token is None:
+channel_secret = os.getenv('LINE_CHANNEL_SECRET')
+channel_access_token = os.getenv('LINE_CHANNEL_ACCESS_TOKEN')
+if channel_secret is None or channel_access_token is None or my_user_id is None:
     print('Specify LINE_CHANNEL_SECRET and LINE_CHANNEL_ACCESS_TOKEN as environment variables.')
     sys.exit(1)
 
