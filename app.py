@@ -29,6 +29,9 @@ line_bot_api.push_message(my_user_id, TextSendMessage(text="start"))
 
 @app.route('/')
 def hello():
+    
+    stock = twstock.Stock('2317')  #鴻海
+    print(stock.price)
     return f'Hello, Heroku!'
 
 @app.route("/is-server-alive")
@@ -78,9 +81,9 @@ def handle_message(event):
 
         line_bot_api.reply_message(
             event.reply_token,
-            TextSendMessage(text=stock.price))
+            TextSendMessage(text=["擷取股價中", str(stock.price)]))
         return
 
 
 if __name__ == "__main__":
-    app.run()
+    app.run(debug=True)
