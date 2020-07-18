@@ -12,6 +12,8 @@ requests = "*"
 flask = "*"
 line-bot-sdk = "*"
 gunicorn = "*"
+twstock = "*"
+lxml = "*"
 
 [requires]
 python_version = "3.7"
