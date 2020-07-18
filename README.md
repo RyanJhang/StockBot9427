@@ -67,25 +67,17 @@ https://<ngrok_uuid>.ngrok.io/is-server-alive
 ## vscode's setting
 ### File->Preferences->Settings-> find "python.pythonPath"
 ```
-    "python.pythonPath": "C:\\Users\\jhang\\.virtualenvs\\StockBot9427-a5qWSRp8\\Scripts\\python.exe"
+"python.pythonPath": "C:\\Users\\jhang\\.virtualenvs\\StockBot9427-a5qWSRp8\\Scripts\\python.exe"
 ```
-
-
-
-
-
 
 line 官方的開發者後台
 ```
 https://developers.line.biz/console/provider/1654206852
 ```
 
-
-
 ``` run service
 python app.py 9427
 ```
-
 
 ## 部屬到Heroku流程
 ```
@@ -99,7 +91,7 @@ cd WORKING_DIRECTORY
 heroku login
 
 # 改成heroku app名稱
-$env:HEROKU_APP=<your_heroku_app>
+$env:HEROKU_APP="<your_heroku_app>"
 
 # 確認是否正確
 echo $env:HEROKU_APP
@@ -108,11 +100,16 @@ echo $env:HEROKU_APP
 heroku git:remote -a $env:HEROKU_APP
 
 # 定義 LINE的資訊到 Heroku 環境變數中
-heroku config:set --app $env:HEROKU_APP LINE_USER_ID=<your_id>
-heroku config:set --app $env:HEROKU_APP LINE_CHANNEL_SECRET=<your_secret_key> 
-heroku config:set --app $env:HEROKU_APP LINE_CHANNEL_ACCESS_TOKEN=<your_access_token_key>
+heroku config:set --app $env:HEROKU_APP LINE_USER_ID="<your_id>"
+heroku config:set --app $env:HEROKU_APP LINE_CHANNEL_SECRET="<your_secret_key>"
+heroku config:set --app $env:HEROKU_APP LINE_CHANNEL_ACCESS_TOKEN="<your_access_token_key>"
 
 # 確認是否定義成功，有出現才是成功
 heroku config --app $env:HEROKU_APP
+
+# 定義開發環境
+[environment]::SetEnvironmentvariable("LINE_USER_ID", "<your_secret_key>", "User")
+[environment]::SetEnvironmentvariable("LINE_CHANNEL_SECRET", "<your_id>", "User")
+[environment]::SetEnvironmentvariable("LINE_CHANNEL_ACCESS_TOKEN", "<your_access_token_key>", "User")
 ```
 
