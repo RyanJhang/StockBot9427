@@ -1,17 +1,19 @@
+
 import os
 import re
+import sys
 
+import twstock
 from flask import Flask, abort, request
 from linebot import LineBotApi, WebhookHandler
 from linebot.exceptions import InvalidSignatureError
 from linebot.models import *
 from linebot.models import MessageEvent, TextMessage, TextSendMessage
 
-my_user_id = os.getenv('LINE_USER_ID')
-
 app = Flask(__name__)
 
 # get channel_secret and channel_access_token from your environment variable
+my_user_id = os.getenv('LINE_USER_ID')
 channel_secret = os.getenv('LINE_CHANNEL_SECRET')
 channel_access_token = os.getenv('LINE_CHANNEL_ACCESS_TOKEN')
 if channel_secret is None or channel_access_token is None or my_user_id is None:
@@ -20,6 +22,7 @@ if channel_secret is None or channel_access_token is None or my_user_id is None:
 
 line_bot_api = LineBotApi(channel_access_token)
 handler = WebhookHandler(channel_secret)
+
 line_bot_api.push_message(my_user_id, TextSendMessage(text="start"))
 
 # 此為 Webhook callback endpoint
@@ -27,6 +30,9 @@ line_bot_api.push_message(my_user_id, TextSendMessage(text="start"))
 
 @app.route('/')
 def hello():
+    
+    stock = twstock.Stock('2317')  #鴻海
+    print(stock.price)
     return f'Hello, Heroku!'
 
 @app.route("/is-server-alive")
@@ -52,8 +58,6 @@ def callback():
     return 'OK'
 
 # decorator 負責判斷 event 為 MessageEvent 實例，event.message 為 TextMessage 實例。所以此為處理 TextMessage 的 handler
-
-
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
 
@@ -73,7 +77,22 @@ def handle_message(event):
             event.reply_token,
             TextSendMessage(text="我還沒完成".format(event.message.text)))
         return
+    elif re.match("。", msg):
+        re_result = re.match(r"。(?P<stock>\d{4})", msg)
+        
+        stock_name = re_result["stock"]
+        print(stock_name)
+        stock = twstock.Stock(stock_name)  #鴻海
+        print(str(stock.price))
+        line_bot_api.reply_message(
+            event.reply_token,
+            [TextSendMessage(text="擷取股價中"),
+             TextSendMessage(text=f"{stock_name}"),
+             TextSendMessage(text=f"{stock_name}:{stock.price[0]}")
+             ]
+        )
+        return
 
 
 if __name__ == "__main__":
-    app.run()
+    app.run(debug=True)
