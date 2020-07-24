@@ -1,14 +1,14 @@
 
 import os
 import re
+import sys
 
+import twstock
 from flask import Flask, abort, request
 from linebot import LineBotApi, WebhookHandler
 from linebot.exceptions import InvalidSignatureError
 from linebot.models import *
 from linebot.models import MessageEvent, TextMessage, TextSendMessage
-
-import twstock
 
 app = Flask(__name__)
 
@@ -22,6 +22,7 @@ if channel_secret is None or channel_access_token is None or my_user_id is None:
 
 line_bot_api = LineBotApi(channel_access_token)
 handler = WebhookHandler(channel_secret)
+
 line_bot_api.push_message(my_user_id, TextSendMessage(text="start"))
 
 # 此為 Webhook callback endpoint
@@ -76,12 +77,20 @@ def handle_message(event):
             event.reply_token,
             TextSendMessage(text="我還沒完成".format(event.message.text)))
         return
-    elif re.match("#", msg):
-        stock = twstock.Stock('2317')  #鴻海
-
+    elif re.match("。", msg):
+        re_result = re.match(r"。(?P<stock>\d{4})", msg)
+        
+        stock_name = re_result["stock"]
+        print(stock_name)
+        stock = twstock.Stock(stock_name)  #鴻海
+        print(str(stock.price))
         line_bot_api.reply_message(
             event.reply_token,
-            TextSendMessage(text=["擷取股價中", str(stock.price)]))
+            [TextSendMessage(text="擷取股價中"),
+             TextSendMessage(text=f"{stock_name}"),
+             TextSendMessage(text=f"{stock_name}:{stock.price[0]}")
+             ]
+        )
         return
 
 
